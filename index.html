@@ -3,732 +3,818 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soluway — AI y automatización para tu negocio</title>
-  <meta name="description" content="Automatizamos tareas, creamos bots y aplicamos inteligencia artificial para que tu negocio trabaje mejor sin contratar más gente." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Soluway — Automatización e IA para PyMEs</title>
+  <meta name="description" content="Construimos bots de WhatsApp, automatizaciones y herramientas a medida para PyMEs. Te decimos qué se puede automatizar, sin tecnicismos." />
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon_square.png" />
   <link rel="shortcut icon" href="assets/favicon_square.png" />
   <link rel="apple-touch-icon" href="assets/favicon_square.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary:  '#2F7D6B',
-            accent:   '#3FA58E',
-            surface:  '#F5FAF8',
-            dark:     '#0F1F1B',
-            muted:    '#6B7C76',
-            border:   '#DCE7E2',
-          },
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-        },
-      },
-    };
-  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --verde: #2F7D6B;
+      --acento: #3FA58E;
+      --tinta: #0F1F1B;
+      --crema: #F5FAF8;
+      --gris-suave: #DCE7E2;
+      --gris-ui: #6B7C76;
+      /* gris UI oscurecido: mismo matiz, pasa AA 4.5:1 sobre crema y blanco */
+      --gris-texto: #57685F;
+      --terracota: #E76F51;
+      --display: 'Space Grotesk', sans-serif;
+      --cuerpo: 'Inter', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --ancho: 1120px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #F5FAF8; color: #0F1F1B; }
 
-    /* Nav link underline animation */
-    .nav-link { position: relative; }
-    .nav-link::after {
+    body {
+      font-family: var(--cuerpo);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      background: var(--crema);
+      color: var(--tinta);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--verde); color: var(--crema); }
+
+    a { color: var(--verde); text-decoration: none; }
+    a:hover { color: var(--acento); }
+
+    :focus-visible {
+      outline: 2px solid var(--verde);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .wrap {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Etiqueta mono de sección (jerarquía del manual) ── */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--verde);
+      text-transform: uppercase;
+    }
+
+    /* ── Nav ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--crema) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gris-suave);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav img { height: 30px; width: auto; display: block; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+    .nav-links a { color: var(--tinta); }
+    .nav-links a:hover { color: var(--verde); }
+    .btn-nav {
+      background: var(--verde);
+      color: var(--crema) !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      transition: background .18s ease;
+    }
+    .btn-nav:hover { background: var(--acento); }
+    @media (max-width: 720px) {
+      .nav-links a:not(.btn-nav) { display: none; }
+    }
+
+    /* ── Hero ── */
+    .hero { padding: 120px 0 100px; }
+    .hero .kicker { display: block; margin-bottom: 28px; }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.625rem, 7vw, 5.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: 15ch;
+      text-wrap: balance;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--verde);
+    }
+    .hero-sub {
+      margin-top: 32px;
+      max-width: 58ch;
+      font-size: 1.1875rem;
+      color: var(--gris-texto);
+    }
+    .hero-cta {
+      margin-top: 44px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      font-family: var(--cuerpo);
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--verde);
+      color: var(--crema);
+      padding: 15px 30px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background .18s ease, transform .18s ease;
+    }
+    .btn:hover { background: var(--acento); color: var(--crema); transform: translateY(-1px); }
+    .link-arrow {
+      font-weight: 600;
+      color: var(--tinta);
+    }
+    .link-arrow::after {
+      content: ' ↓';
+      color: var(--verde);
+    }
+    .link-arrow:hover { color: var(--verde); }
+    .hero-nota {
+      margin-top: 36px;
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      color: var(--gris-texto);
+    }
+
+    /* Entrada del hero — el único momento de motion autoral */
+    @media (prefers-reduced-motion: no-preference) {
+      /* arranca visible (.45) para que una animación pausada nunca deje el hero en blanco */
+      .hero > .wrap > * {
+        opacity: .45;
+        transform: translateY(18px);
+        animation: subir .8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .hero > .wrap > *:nth-child(2) { animation-delay: .08s; }
+      .hero > .wrap > *:nth-child(3) { animation-delay: .16s; }
+      .hero > .wrap > *:nth-child(4) { animation-delay: .24s; }
+      .hero > .wrap > *:nth-child(5) { animation-delay: .32s; }
+      @keyframes subir {
+        to { opacity: 1; transform: none; }
+      }
+    }
+
+    /* ── Secciones: grilla etiqueta / contenido ── */
+    section { border-top: 1px solid var(--gris-suave); }
+    .seccion { padding: 96px 0; }
+    .seccion-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .seccion-grid > .kicker { padding-top: 10px; }
+    @media (max-width: 860px) {
+      .seccion { padding: 72px 0; }
+      .seccion-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+    h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      margin-bottom: 20px;
+    }
+    .intro {
+      color: var(--gris-texto);
+      max-width: 60ch;
+      margin-bottom: 8px;
+    }
+
+    /* ── Posibilidades: índice tipográfico ── */
+    .lista-posibilidades {
+      list-style: none;
+      margin-top: 40px;
+      border-top: 1px solid var(--gris-suave);
+    }
+    .lista-posibilidades li {
+      border-bottom: 1px solid var(--gris-suave);
+    }
+    .fila {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+      padding: 26px 0;
+      align-items: baseline;
+    }
+    @media (max-width: 720px) {
+      .fila { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
+    }
+    .fila h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      transition: color .15s ease;
+    }
+    .fila p {
+      font-size: 0.9375rem;
+      color: var(--gris-texto);
+      max-width: 62ch;
+    }
+    .lista-posibilidades li:hover h3 { color: var(--verde); }
+    .fila h3::after {
+      content: ' →';
+      color: var(--verde);
+      opacity: 0;
+      display: inline-block;
+      transform: translateX(-4px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .lista-posibilidades li:hover h3::after { opacity: 1; transform: none; }
+    .nota-lista {
+      margin-top: 28px;
+      font-size: 0.9375rem;
+      color: var(--gris-texto);
+    }
+
+    /* ── Caso: antes / después ── */
+    .caso-meta {
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      color: var(--gris-texto);
+      margin-bottom: 36px;
+    }
+    .antes-despues {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--gris-suave);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    @media (max-width: 780px) {
+      .antes-despues { grid-template-columns: 1fr; }
+      .col-antes { border-right: none !important; border-bottom: 1px solid var(--gris-suave); }
+    }
+    .col-antes, .col-despues { padding: 36px; }
+    .col-antes { border-right: 1px solid var(--gris-suave); }
+    .col-titulo {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--tinta);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .col-titulo::before {
       content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: #2F7D6B;
-      transition: width .25s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-
-    /* Hamburger */
-    #menu-toggle:checked ~ #mobile-menu { display: block; }
-
-    /* Card hover */
-    .card { transition: transform .2s ease, box-shadow .2s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(47,125,107,.13); }
-
-    /* Counter animation */
-    .count-up { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
-    .count-up.visible { opacity: 1; transform: none; }
-
-    /* Section fade in */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
-
-    /* Tag badge */
-    .tag { display: inline-block; font-size: .68rem; font-weight: 600; padding: 2px 10px; border-radius: 99px; }
-
-    /* Gradient hero */
-    .hero-bg {
-      background: linear-gradient(135deg, #e8f5f1 0%, #F5FAF8 60%, #d4ede6 100%);
-    }
-
-    /* Posibilidades icon circle */
-    .icon-circle {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      background: #e8f5f1;
-      color: #2F7D6B;
-      font-size: 1.3rem;
+      width: 10px;
+      height: 10px;
       flex-shrink: 0;
     }
-
-    /* Star rating */
-    .stars { color: #3FA58E; letter-spacing: 1px; }
-
-    /* Scroll top */
-    #scroll-top {
-      position: fixed; bottom: 2rem; right: 2rem;
-      background: #2F7D6B; color: white;
-      width: 42px; height: 42px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s;
-      z-index: 99;
-      cursor: pointer;
+    .col-antes .col-titulo::before { background: var(--terracota); }
+    .col-despues .col-titulo::before { background: var(--verde); }
+    .dato { padding: 14px 0; border-top: 1px solid var(--gris-suave); }
+    .dato:first-of-type { border-top: none; padding-top: 0; }
+    .dato strong {
+      display: block;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+      font-variant-numeric: tabular-nums;
     }
-    #scroll-top.show { opacity: 1; pointer-events: auto; }
+    .col-antes .dato strong { color: var(--terracota); }
+    .col-despues .dato strong { color: var(--verde); }
+    .dato span { font-size: 0.9375rem; color: var(--gris-texto); }
+    .caso-cierre {
+      margin-top: 28px;
+      max-width: 62ch;
+      color: var(--gris-texto);
+      font-size: 0.9375rem;
+    }
+
+    /* ── Herramientas construidas ── */
+    .grid-herramientas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+      margin-top: 40px;
+    }
+    @media (max-width: 720px) {
+      .grid-herramientas { grid-template-columns: 1fr; }
+    }
+    .herramienta {
+      border-top: 1px solid var(--gris-suave);
+      padding: 24px 0 28px;
+    }
+    .herramienta h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .herramienta p {
+      font-size: 0.9375rem;
+      color: var(--gris-texto);
+      max-width: 48ch;
+    }
+
+    /* ── Cómo trabajamos ── */
+    .pasos { list-style: none; margin-top: 40px; counter-reset: paso; }
+    .pasos li {
+      counter-increment: paso;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 20px;
+      padding: 28px 0;
+      border-top: 1px solid var(--gris-suave);
+    }
+    .pasos li::before {
+      content: counter(paso, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--verde);
+      padding-top: 5px;
+    }
+    .pasos h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+    .pasos p { color: var(--gris-texto); font-size: 0.9375rem; max-width: 60ch; }
+
+    /* ── Contacto ── */
+    .contacto-mail {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+    form {
+      background: #fff;
+      border: 1px solid var(--gris-suave);
+      border-radius: 8px;
+      padding: 36px;
+      max-width: 640px;
+    }
+    @media (max-width: 600px) { form { padding: 24px; } }
+    .campo { margin-bottom: 22px; }
+    .campo-doble {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 600px) { .campo-doble { grid-template-columns: 1fr; gap: 0; } }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    input, textarea {
+      width: 100%;
+      font-family: var(--cuerpo);
+      font-size: 0.9375rem;
+      color: var(--tinta);
+      background: var(--crema);
+      border: 1px solid var(--gris-suave);
+      border-radius: 6px;
+      padding: 12px 14px;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    input::placeholder, textarea::placeholder { color: var(--gris-texto); }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--verde);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--verde) 15%, transparent);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .btn[disabled] { opacity: .6; cursor: wait; }
+    .form-msg { margin-top: 18px; font-size: 0.9375rem; font-weight: 500; }
+    .form-msg.ok { color: var(--verde); }
+    /* terracota oscurecido para texto chico: AA sobre crema */
+    .form-msg.error { color: #C14E31; }
+    [hidden] { display: none !important; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--gris-suave);
+      padding: 64px 0 40px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .footer-marca { display: flex; flex-direction: column; gap: 12px; }
+    /* el PNG trae ~71px de aire transparente a la izquierda (lienzo 1600px): a 52px de alto son 6px */
+    .footer-marca img { height: 52px; width: auto; align-self: flex-start; margin-left: -6px; }
+    .footer-marca p {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.0625rem;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+    .footer-nav a { color: var(--tinta); }
+    .footer-nav a:hover { color: var(--verde); }
+    .legales { margin-bottom: 40px; }
+    .legales details {
+      border-top: 1px solid var(--gris-suave);
+      font-size: 0.875rem;
+      color: var(--gris-texto);
+    }
+    .legales details:last-child { border-bottom: 1px solid var(--gris-suave); }
+    .legales summary {
+      cursor: pointer;
+      padding: 14px 0;
+      font-weight: 500;
+      color: var(--tinta);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .legales summary::-webkit-details-marker { display: none; }
+    .legales summary::after {
+      content: '+';
+      font-family: var(--mono);
+      color: var(--verde);
+    }
+    .legales details[open] summary::after { content: '−'; }
+    .legales details > div { padding: 0 0 18px; max-width: 70ch; }
+    .legales details p { margin-bottom: 10px; }
+    .footer-base {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--gris-texto);
+    }
   </style>
 </head>
 <body>
+<!--
+THESIS: un dueño de PyME entiende en una lectura qué le automatizan y manda el formulario. Se refusa la landing de categoría: cards con iconos, contadores animados, testimonios placeholder, hero con ilustración.
+OWN-WORLD: crema #F5FAF8, tinta #0F1F1B, verde #2F7D6B como único acento (terracota solo en el "antes" del caso), Space Grotesk display grande, Inter cuerpo, IBM Plex Mono en etiquetas y metadata, reglas hairline #DCE7E2 como estructura.
+STORY: lee un titular que nombra su dolor, recorre un índice tipográfico de procesos automatizables, ve un caso real antes/después, entiende los tres pasos y responde el formulario.
+FIRST VIEWPORT: nav mínima; etiqueta mono; H1 gigante balanceado a la izquierda; párrafo corto; CTA verde "Contanos qué te frena" + ancla secundaria; nota mono. El aire es el lujo.
+FORM: canon minimalista tipográfico, standing exit elegido por el usuario tras 3 re-rolls; seed keys 8fe80826 / 45e95d59 / ecd0b015. Listón: Linear / Stripe / Vercel.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
 
-<!-- ─── NAVBAR ─────────────────────────────────────────────── -->
-<header id="navbar" class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-border transition-shadow">
-  <div class="max-w-6xl mx-auto px-5 flex items-center justify-between h-16">
-
-    <!-- Logo -->
-    <a href="#inicio" class="flex items-center gap-2">
-      <img src="assets/logo.png" alt="Soluway" class="h-8 w-auto" />
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" aria-label="Soluway — inicio">
+      <img src="assets/logo.png" alt="Soluway" />
     </a>
-
-    <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-dark">
-      <a href="#inicio"       class="nav-link hover:text-primary transition-colors">Inicio</a>
-      <a href="#nosotros"     class="nav-link hover:text-primary transition-colors">Quiénes somos</a>
-      <a href="#posibilidades" class="nav-link hover:text-primary transition-colors">Posibilidades</a>
-      <a href="#proyectos"    class="nav-link hover:text-primary transition-colors">Proyectos</a>
-      <a href="#resultados"   class="nav-link hover:text-primary transition-colors">Resultados</a>
-      <a href="#resenas"      class="nav-link hover:text-primary transition-colors">Reseñas</a>
-      <a href="#contacto" class="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-accent transition-colors">
-        Hablemos
-      </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#posibilidades">Posibilidades</a>
+      <a href="#caso">Caso real</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#como">Cómo trabajamos</a>
+      <a href="#contacto" class="btn-nav">Hablemos</a>
     </nav>
-
-    <!-- Mobile hamburger -->
-    <button id="hamburger-btn" class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer" onclick="toggleMenu()">
-      <span class="ham-line block w-6 h-0.5 bg-dark transition-all duration-300"></span>
-      <span class="ham-line block w-6 h-0.5 bg-dark transition-all duration-300"></span>
-      <span class="ham-line block w-4 h-0.5 bg-dark transition-all duration-300"></span>
-    </button>
-  </div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border px-5 py-4 flex flex-col gap-4 text-sm font-medium">
-    <a href="#inicio"        onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Inicio</a>
-    <a href="#nosotros"      onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Quiénes somos</a>
-    <a href="#posibilidades" onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Posibilidades</a>
-    <a href="#proyectos"     onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Proyectos</a>
-    <a href="#resultados"    onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Resultados</a>
-    <a href="#resenas"       onclick="closeMenu()" class="text-dark hover:text-primary transition-colors">Reseñas</a>
-    <a href="#contacto"      onclick="closeMenu()" class="bg-primary text-white text-center px-4 py-2.5 rounded-full font-semibold hover:bg-accent transition-colors">Hablemos</a>
   </div>
 </header>
 
+<main id="inicio">
 
-<!-- ─── HERO ──────────────────────────────────────────────── -->
-<section id="inicio" class="hero-bg py-24 md:py-32">
-  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
-    <div class="fade-in">
-      <span class="tag bg-primary/10 text-primary mb-4">AI · Automatización · Bots</span>
-      <h1 class="text-4xl md:text-5xl font-black text-dark leading-tight mb-5">
-        Tu negocio puede <span class="text-primary">trabajar solo</span> en las tareas de siempre
-      </h1>
-      <p class="text-muted text-lg leading-relaxed mb-8">
-        Automatizamos procesos, creamos bots y aplicamos inteligencia artificial para que vos te enfoques en lo que importa — sin necesitar contratar un equipo de tecnología.
+  <!-- ── Hero ── -->
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <span class="kicker">Automatización e IA para PyMEs · Buenos Aires</span>
+      <h1>Lo que hoy hacés a mano, mañana <em>se hace solo</em>.</h1>
+      <p class="hero-sub">
+        Construimos bots de WhatsApp, automatizaciones y herramientas a medida para tu negocio.
+        Sin tecnicismos: te decimos qué se puede automatizar y cuánto tiempo te devuelve.
       </p>
-      <div class="flex flex-wrap gap-3">
-        <a href="#contacto" class="bg-primary text-white px-7 py-3.5 rounded-full font-semibold hover:bg-accent transition-colors text-base shadow-sm">
-          Hablemos
-        </a>
-        <a href="#posibilidades" class="border border-primary text-primary px-7 py-3.5 rounded-full font-semibold hover:bg-primary/5 transition-colors text-base">
-          Ver posibilidades
-        </a>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn">Contanos qué te frena</a>
+        <a href="#posibilidades" class="link-arrow">Ver qué es posible</a>
       </div>
-      <p class="mt-6 text-sm text-muted flex items-center gap-2">
-        <i class="fa-solid fa-circle-check text-primary"></i>
-        Sin tecnicismos. Consulta inicial sin cargo.
-      </p>
+      <p class="hero-nota">Consulta inicial sin cargo — respondemos en menos de 24 hs</p>
     </div>
+  </section>
 
-    <!-- Hero visual -->
-    <div class="fade-in hidden md:flex justify-center">
-      <div class="relative w-80 h-80">
-        <!-- Circles decoration -->
-        <div class="absolute inset-0 rounded-full bg-primary/5"></div>
-        <div class="absolute inset-8 rounded-full bg-primary/8 border border-primary/10"></div>
-        <!-- Center icon -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center gap-3">
-            <i class="fa-solid fa-robot text-5xl text-primary"></i>
-            <span class="text-dark font-bold text-base">Automatizando…</span>
-            <div class="flex gap-1">
-              <span class="w-2 h-2 rounded-full bg-primary animate-bounce" style="animation-delay:0s"></span>
-              <span class="w-2 h-2 rounded-full bg-accent animate-bounce" style="animation-delay:.15s"></span>
-              <span class="w-2 h-2 rounded-full bg-primary/40 animate-bounce" style="animation-delay:.3s"></span>
+  <!-- ── Posibilidades ── -->
+  <section id="posibilidades" class="seccion">
+    <div class="wrap seccion-grid">
+      <span class="kicker">→ Posibilidades</span>
+      <div>
+        <h2>Qué se puede automatizar hoy</h2>
+        <p class="intro">
+          No hace falta ser una empresa grande. Estos son procesos que negocios como el tuyo
+          ya hacen sin tocar el celu.
+        </p>
+        <ul class="lista-posibilidades">
+          <li class="fila">
+            <h3>Bot de WhatsApp</h3>
+            <p>Responde consultas, agenda turnos y manda la información de tus productos las 24 hs. Vos atendés solo lo que necesita una persona.</p>
+          </li>
+          <li class="fila">
+            <h3>Presupuestos automáticos</h3>
+            <p>El cliente completa un formulario y recibe su presupuesto al instante. Sin ir y venir de mensajes, sin errores de cálculo.</p>
+          </li>
+          <li class="fila">
+            <h3>Emails que se responden solos</h3>
+            <p>El sistema detecta de qué se trata cada email, responde lo frecuente y te deriva solo lo que importa.</p>
+          </li>
+          <li class="fila">
+            <h3>Reportes sin planillas</h3>
+            <p>Tus ventas, pedidos o métricas del día llegan solos a tu WhatsApp o email cada mañana.</p>
+          </li>
+          <li class="fila">
+            <h3>Lectura de documentos</h3>
+            <p>Facturas, remitos y contratos: los datos clave se extraen y se cargan solos en tu sistema. Sin tipear.</p>
+          </li>
+          <li class="fila">
+            <h3>Agenda y turnos online</h3>
+            <p>Tus clientes reservan, reciben recordatorio automático y cancelan sin que intervengas. Menos no-shows.</p>
+          </li>
+          <li class="fila">
+            <h3>Control de stock</h3>
+            <p>Alertas automáticas antes de que un producto se agote. El sistema lleva el seguimiento, vos solo comprás.</p>
+          </li>
+          <li class="fila">
+            <h3>Integraciones entre sistemas</h3>
+            <p>Tu agenda, tus planillas y tu facturación hablando entre sí, sin que copies datos de un lado a otro.</p>
+          </li>
+        </ul>
+        <p class="nota-lista">
+          ¿Tu caso no está en la lista? <a href="#contacto">Preguntanos igual</a> — si no conviene automatizarlo, te lo decimos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Caso real ── -->
+  <section id="caso" class="seccion">
+    <div class="wrap seccion-grid">
+      <span class="kicker">→ Caso real</span>
+      <div>
+        <h2>Una clínica de kinesiología, antes y después</h2>
+        <p class="caso-meta">Buenos Aires · equipo de 4 personas · 3 profesionales con agenda propia</p>
+        <div class="antes-despues">
+          <div class="col-antes">
+            <p class="col-titulo">Antes — todo a mano</p>
+            <div class="dato">
+              <strong>4 hs por día</strong>
+              <span>de la recepcionista gestionando turnos por WhatsApp y teléfono</span>
+            </div>
+            <div class="dato">
+              <strong>30% de no-shows</strong>
+              <span>sin ningún recordatorio automático</span>
+            </div>
+            <div class="dato">
+              <strong>$180.000 por mes</strong>
+              <span>en horas profesionales perdidas por turnos que no se presentan</span>
+            </div>
+            <div class="dato">
+              <strong>Doble booking</strong>
+              <span>constante entre 3 agendas revisadas a ojo</span>
+            </div>
+          </div>
+          <div class="col-despues">
+            <p class="col-titulo">Después — con el bot andando</p>
+            <div class="dato">
+              <strong>El paciente escribe</strong>
+              <span>por WhatsApp y el bot le muestra los turnos disponibles al momento</span>
+            </div>
+            <div class="dato">
+              <strong>Confirmación directa</strong>
+              <span>contra el Google Calendar de cada profesional — sin doble booking</span>
+            </div>
+            <div class="dato">
+              <strong>Recordatorio automático</strong>
+              <span>24 hs antes de cada turno, sin que nadie levante el teléfono</span>
+            </div>
+            <div class="dato">
+              <strong>La recepción atiende personas</strong>
+              <span>en el mostrador, no un chat que no para de sonar</span>
             </div>
           </div>
         </div>
-        <!-- Floating badges -->
-        <div class="absolute -top-2 right-4 bg-white rounded-xl shadow-md px-3 py-2 flex items-center gap-2 text-xs font-semibold text-dark">
-          <i class="fa-brands fa-whatsapp text-green-500"></i> Bot activo
-        </div>
-        <div class="absolute bottom-4 -left-4 bg-white rounded-xl shadow-md px-3 py-2 flex items-center gap-2 text-xs font-semibold text-dark">
-          <i class="fa-solid fa-bolt text-primary"></i> +12h ahorradas/sem
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── QUIÉNES SOMOS ────────────────────────────────────── -->
-<section id="nosotros" class="py-20 bg-white">
-  <div class="max-w-4xl mx-auto px-5 text-center fade-in">
-    <span class="tag bg-primary/10 text-primary mb-3">Quiénes somos</span>
-    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-5">
-      Tecnología que se adapta a vos, no al revés
-    </h2>
-    <p class="text-muted text-lg leading-relaxed mb-8">
-      En Soluway sabemos que los negocios chicos y medianos muchas veces quedan afuera de las herramientas modernas — no por falta de ganas, sino porque implementarlas parece caro, complicado o exclusivo para empresas grandes.
-    </p>
-    <p class="text-muted text-lg leading-relaxed mb-10">
-      Por eso existimos. Te acercamos el mundo de la inteligencia artificial y la automatización en soluciones concretas, simples y a tu medida. Desde un flujo de trabajo automático hasta un agente de AI que atiende a tus clientes: lo hacemos funcionar, lo explicamos sin tecnicismos y lo ajustamos a lo que necesitás.
-    </p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
-      <div class="bg-surface rounded-2xl p-5 border border-border">
-        <div class="icon-circle mb-3"><i class="fa-solid fa-bullseye"></i></div>
-        <h3 class="font-bold text-dark mb-1">Claridad</h3>
-        <p class="text-sm text-muted">Sin tecnicismos. Te contamos qué hacemos, por qué y cuánto mejora tu día a día.</p>
-      </div>
-      <div class="bg-surface rounded-2xl p-5 border border-border">
-        <div class="icon-circle mb-3"><i class="fa-solid fa-bolt"></i></div>
-        <h3 class="font-bold text-dark mb-1">Velocidad</h3>
-        <p class="text-sm text-muted">Soluciones que se implementan rápido y empiezan a funcionar desde el primer día.</p>
-      </div>
-      <div class="bg-surface rounded-2xl p-5 border border-border">
-        <div class="icon-circle mb-3"><i class="fa-solid fa-chart-line"></i></div>
-        <h3 class="font-bold text-dark mb-1">Impacto real</h3>
-        <p class="text-sm text-muted">No prometemos tecnología. Prometemos tiempo recuperado y procesos que funcionan solos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── POSIBILIDADES ────────────────────────────────────── -->
-<section id="posibilidades" class="py-20 bg-surface">
-  <div class="max-w-6xl mx-auto px-5">
-    <div class="text-center mb-12 fade-in">
-      <span class="tag bg-primary/10 text-primary mb-3">¿Qué podemos hacer por tu negocio?</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-        Ejemplos de lo que es posible hoy
-      </h2>
-      <p class="text-muted text-lg max-w-2xl mx-auto">
-        No hace falta ser una empresa grande. Con las herramientas correctas, cualquier negocio puede automatizar tareas que hoy hacen a mano.
-      </p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <!-- 1 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle bg-green-50"><i class="fa-brands fa-whatsapp text-green-500"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Bot de WhatsApp</h3>
-            <p class="text-sm text-muted leading-relaxed">Respondé preguntas frecuentes, agendá turnos o enviá información de tus productos automáticamente — las 24 hs, sin estar pegado al teléfono.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Atención al cliente</span>
-          <span class="tag bg-surface text-muted border border-border">Turnos</span>
-        </div>
-      </div>
-
-      <!-- 2 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-file-invoice"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Presupuestos automáticos</h3>
-            <p class="text-sm text-muted leading-relaxed">El cliente completa un formulario y recibe su presupuesto personalizado al instante. Sin ir y venir, sin errores de cálculo.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Ventas</span>
-          <span class="tag bg-surface text-muted border border-border">Comercios</span>
-        </div>
-      </div>
-
-      <!-- 3 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-envelope-open-text"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Emails que se responden solos</h3>
-            <p class="text-sm text-muted leading-relaxed">Clasificá, respondé y derivá emails según el tema sin tocarlos. El sistema detecta la intención y actúa.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Email</span>
-          <span class="tag bg-surface text-muted border border-border">Soporte</span>
-        </div>
-      </div>
-
-      <!-- 4 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-chart-bar"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Reporte diario sin planillas</h3>
-            <p class="text-sm text-muted leading-relaxed">Tus ventas, pedidos o métricas del día llegan solos a tu WhatsApp o email cada mañana. Cero trabajo manual.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Reportes</span>
-          <span class="tag bg-surface text-muted border border-border">Datos</span>
-        </div>
-      </div>
-
-      <!-- 5 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-brands fa-instagram"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Contenido para redes sociales</h3>
-            <p class="text-sm text-muted leading-relaxed">Generá publicaciones para Instagram o Facebook con AI: texto, hashtags y variantes listas para publicar.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Marketing</span>
-          <span class="tag bg-surface text-muted border border-border">Redes</span>
-        </div>
-      </div>
-
-      <!-- 6 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-file-pdf"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Lectura automática de documentos</h3>
-            <p class="text-sm text-muted leading-relaxed">Facturas, remitos o contratos: la AI extrae los datos clave y los carga en tu sistema sin que lo hagas vos.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Admin</span>
-          <span class="tag bg-surface text-muted border border-border">Contabilidad</span>
-        </div>
-      </div>
-
-      <!-- 7 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-calendar-check"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Agenda y turnos online</h3>
-            <p class="text-sm text-muted leading-relaxed">Tus clientes reservan, reciben recordatorio automático y cancelan sin que vos intervengas. Menos no-shows.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Turnos</span>
-          <span class="tag bg-surface text-muted border border-border">Servicios</span>
-        </div>
-      </div>
-
-      <!-- 8 -->
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <div class="flex items-start gap-4">
-          <div class="icon-circle"><i class="fa-solid fa-boxes-stacked"></i></div>
-          <div>
-            <h3 class="font-bold text-dark mb-1">Control de stock automático</h3>
-            <p class="text-sm text-muted leading-relaxed">Recibí alertas cuando un producto está por agotarse. El sistema lleva el seguimiento, vos solo comprás.</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-border flex flex-wrap gap-2">
-          <span class="tag bg-surface text-muted border border-border">Inventario</span>
-          <span class="tag bg-surface text-muted border border-border">Comercios</span>
-        </div>
-      </div>
-
-      <!-- 9 — CTA -->
-      <div class="card bg-primary rounded-2xl p-6 fade-in flex flex-col justify-between">
-        <div>
-          <h3 class="font-bold text-white text-lg mb-2">¿Tenés algo en mente?</h3>
-          <p class="text-white/80 text-sm leading-relaxed">Contanos qué proceso te consume más tiempo y te decimos si se puede automatizar.</p>
-        </div>
-        <a href="#contacto" class="mt-5 inline-block bg-white text-primary font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-surface transition-colors text-center">
-          Hablemos →
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── PROYECTOS ─────────────────────────────────────────── -->
-<section id="proyectos" class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-5">
-    <div class="text-center mb-12 fade-in">
-      <span class="tag bg-primary/10 text-primary mb-3">Proyectos</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Lo que construimos</h2>
-      <p class="text-muted text-lg max-w-xl mx-auto">Soluciones reales para problemas concretos.</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-comments"></i></div>
-        <h3 class="font-bold text-dark mb-2">Asistente de Soporte AI (RAG)</h3>
-        <p class="text-sm text-muted leading-relaxed">Responde consultas frecuentes e internas usando la base documental del negocio. Aprende de tus propios archivos.</p>
-      </div>
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-file-lines"></i></div>
-        <h3 class="font-bold text-dark mb-2">Automatización de Reportes Semanales</h3>
-        <p class="text-sm text-muted leading-relaxed">Consolida datos, genera PDFs y los envía por email o Slack sin intervención manual.</p>
-      </div>
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-tags"></i></div>
-        <h3 class="font-bold text-dark mb-2">Clasificador de Emails y Tickets</h3>
-        <p class="text-sm text-muted leading-relaxed">Etiquetado automático, asignación de prioridad y derivación por intención del mensaje.</p>
-      </div>
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-file-pdf"></i></div>
-        <h3 class="font-bold text-dark mb-2">Extracción de datos de PDFs</h3>
-        <p class="text-sm text-muted leading-relaxed">Lee facturas y contratos y carga los campos relevantes directo en tu sistema. Sin tipear.</p>
-      </div>
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-pen-nib"></i></div>
-        <h3 class="font-bold text-dark mb-2">Generador de propuestas comerciales</h3>
-        <p class="text-sm text-muted leading-relaxed">Crea borradores con plantillas, tono y precios por servicio en segundos.</p>
-      </div>
-
-      <div class="card bg-surface rounded-2xl p-6 border border-border fade-in">
-        <div class="icon-circle mb-4"><i class="fa-solid fa-gauge-high"></i></div>
-        <h3 class="font-bold text-dark mb-2">Plataforma de Optimización Operativa</h3>
-        <p class="text-sm text-muted leading-relaxed">Orquesta workflows (CRM + hojas + APIs), monitorea KPIs, auditoría de cambios y panel de control completo.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── RESULTADOS ─────────────────────────────────────────── -->
-<section id="resultados" class="py-20 bg-primary">
-  <div class="max-w-5xl mx-auto px-5">
-    <div class="text-center mb-12 fade-in">
-      <span class="tag bg-white/20 text-white mb-3">Resultados</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Números que hablan</h2>
-      <p class="text-white/70 text-lg">Lo que construimos junto a nuestros clientes.</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-      <div class="count-up bg-white/10 border border-white/20 rounded-2xl p-8">
-        <p class="text-5xl font-black text-white mb-2" data-target="77" data-prefix="" data-suffix="">0</p>
-        <p class="text-white/80 font-medium">Clientes activos</p>
-      </div>
-      <div class="count-up bg-white/10 border border-white/20 rounded-2xl p-8">
-        <p class="text-5xl font-black text-white mb-2" data-target="12400" data-prefix="+" data-suffix="">0</p>
-        <p class="text-white/80 font-medium">Personas alcanzadas</p>
-      </div>
-      <div class="count-up bg-white/10 border border-white/20 rounded-2xl p-8">
-        <p class="text-5xl font-black text-white mb-2" data-target="43" data-prefix="+" data-suffix="">0</p>
-        <p class="text-white/80 font-medium">Herramientas creadas</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── RESEÑAS ────────────────────────────────────────────── -->
-<section id="resenas" class="py-20 bg-surface">
-  <div class="max-w-6xl mx-auto px-5">
-    <div class="text-center mb-12 fade-in">
-      <span class="tag bg-primary/10 text-primary mb-3">Reseñas</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-3">Lo que dicen quienes ya lo viven</h2>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-5">
-
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <p class="stars text-lg mb-3">★★★★★</p>
-        <p class="text-dark leading-relaxed mb-5">"Automatizamos tareas que nos llevaban horas. El cambio se notó desde la primera semana."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">M</div>
-          <div>
-            <p class="font-semibold text-dark text-sm">María G.</p>
-            <p class="text-muted text-xs">Operaciones</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <p class="stars text-lg mb-3">★★★★★</p>
-        <p class="text-dark leading-relaxed mb-5">"Las propuestas salen en minutos y con mejor consistencia. Ganamos velocidad sin perder calidad."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">J</div>
-          <div>
-            <p class="font-semibold text-dark text-sm">Julián P.</p>
-            <p class="text-muted text-xs">Comercial</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <p class="stars text-lg mb-3">★★★★★</p>
-        <p class="text-dark leading-relaxed mb-5">"La extracción de datos de PDFs nos redujo errores y aceleró el cierre mensual. Impresionante."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">L</div>
-          <div>
-            <p class="font-semibold text-dark text-sm">Laura S.</p>
-            <p class="text-muted text-xs">Administración</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl p-6 border border-border fade-in">
-        <p class="stars text-lg mb-3">★★★★★</p>
-        <p class="text-dark leading-relaxed mb-5">"Excelente criterio para convertir ideas en herramientas concretas y medibles. Muy recomendable."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">N</div>
-          <div>
-            <p class="font-semibold text-dark text-sm">Nicolás R.</p>
-            <p class="text-muted text-xs">Producto</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── CONTACTO ───────────────────────────────────────────── -->
-<section id="contacto" class="py-20 bg-white">
-  <div class="max-w-2xl mx-auto px-5">
-    <div class="text-center mb-10 fade-in">
-      <span class="tag bg-primary/10 text-primary mb-3">Contacto</span>
-      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-3">Hablemos</h2>
-      <p class="text-muted text-lg leading-relaxed">
-        Contanos qué querés optimizar y te respondemos con un plan inicial. Sin compromiso.
-      </p>
-      <a href="mailto:soluway.group@gmail.com" class="text-primary font-medium hover:underline text-sm mt-2 inline-block">
-        <i class="fa-solid fa-envelope mr-1"></i>soluway.group@gmail.com
-      </a>
-    </div>
-
-    <!-- Form via Formspree — reemplazá YOUR_FORM_ID con tu ID de formspree.io -->
-    <form
-      action="https://formspree.io/f/xbdzyqjd"
-      method="POST"
-      class="bg-surface rounded-2xl p-8 border border-border fade-in"
-      id="contact-form"
-    >
-      <div class="grid sm:grid-cols-2 gap-4 mb-4">
-        <div>
-          <label class="block text-sm font-medium text-dark mb-1.5">Nombre *</label>
-          <input
-            type="text" name="nombre" required
-            placeholder="Tu nombre"
-            class="w-full border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white transition"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-dark mb-1.5">Email *</label>
-          <input
-            type="email" name="email" required
-            placeholder="tu@email.com"
-            class="w-full border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white transition"
-          />
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-dark mb-1.5">Empresa / Negocio</label>
-        <input
-          type="text" name="empresa"
-          placeholder="Nombre de tu negocio (opcional)"
-          class="w-full border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white transition"
-        />
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-dark mb-1.5">¿Qué querés optimizar? *</label>
-        <textarea
-          name="mensaje" required rows="4"
-          placeholder="Contanos qué proceso te consume más tiempo o qué te gustaría automatizar…"
-          class="w-full border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white transition resize-none"
-        ></textarea>
-      </div>
-
-      <button
-        type="submit"
-        class="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-accent transition-colors text-base"
-        id="submit-btn"
-      >
-        Solicitar consulta gratis
-      </button>
-
-      <div id="form-success" class="hidden mt-4 text-center text-primary font-medium text-sm">
-        <i class="fa-solid fa-circle-check mr-1"></i> ¡Mensaje enviado! Te respondemos en menos de 24 hs.
-      </div>
-      <div id="form-error" class="hidden mt-4 text-center text-red-500 font-medium text-sm">
-        Algo salió mal. Escribinos directamente a soluway.group@gmail.com
-      </div>
-    </form>
-  </div>
-</section>
-
-
-<!-- ─── FOOTER ─────────────────────────────────────────────── -->
-<footer class="bg-dark text-white/70 py-12">
-  <div class="max-w-6xl mx-auto px-5">
-    <div class="grid sm:grid-cols-3 gap-8 mb-8">
-
-      <div>
-        <img src="assets/logo.png" alt="Soluway" class="h-7 w-auto mb-3 brightness-0 invert" />
-        <p class="text-sm leading-relaxed">AI y automatización para negocios que quieren crecer sin complicarse.</p>
-      </div>
-
-      <div>
-        <h4 class="font-semibold text-white mb-3">Navegación</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#inicio"         class="hover:text-white transition-colors">Inicio</a></li>
-          <li><a href="#nosotros"       class="hover:text-white transition-colors">Quiénes somos</a></li>
-          <li><a href="#posibilidades"  class="hover:text-white transition-colors">Posibilidades</a></li>
-          <li><a href="#proyectos"      class="hover:text-white transition-colors">Proyectos</a></li>
-          <li><a href="#contacto"       class="hover:text-white transition-colors">Contacto</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="font-semibold text-white mb-3">Contacto</h4>
-        <p class="text-sm mb-2">
-          <i class="fa-solid fa-envelope mr-2 text-primary"></i>
-          <a href="mailto:soluway.group@gmail.com" class="hover:text-white transition-colors">soluway.group@gmail.com</a>
+        <p class="caso-cierre">
+          El caso es real; omitimos el nombre de la clínica por pedido del cliente.
+          Si tenés un negocio con turnos, este mismo esquema aplica casi directo.
         </p>
-        <div class="mt-4 flex gap-3">
-          <a href="#contacto" class="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-accent transition-colors">Hablemos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Herramientas construidas ── -->
+  <section id="herramientas" class="seccion">
+    <div class="wrap seccion-grid">
+      <span class="kicker">→ Herramientas</span>
+      <div>
+        <h2>Herramientas que ya construimos</h2>
+        <p class="intro">
+          Cada una nació de un problema concreto de un cliente. Ninguna vino en caja.
+        </p>
+        <div class="grid-herramientas">
+          <div class="herramienta">
+            <h3>Asistente de soporte con IA</h3>
+            <p>Responde consultas frecuentes e internas usando los documentos del propio negocio. Aprende de tus archivos, no de internet.</p>
+          </div>
+          <div class="herramienta">
+            <h3>Reportes semanales automáticos</h3>
+            <p>Junta los datos, arma el PDF y lo manda por email sin que nadie lo toque.</p>
+          </div>
+          <div class="herramienta">
+            <h3>Clasificador de emails y tickets</h3>
+            <p>Etiqueta, prioriza y deriva cada mensaje según de qué se trata.</p>
+          </div>
+          <div class="herramienta">
+            <h3>Extracción de datos de PDFs</h3>
+            <p>Lee facturas y contratos y carga los campos relevantes directo en tu sistema. Sin tipear.</p>
+          </div>
+          <div class="herramienta">
+            <h3>Generador de propuestas comerciales</h3>
+            <p>Borradores con tu plantilla, tu tono y tus precios por servicio, en segundos.</p>
+          </div>
+          <div class="herramienta">
+            <h3>Plataforma de optimización operativa</h3>
+            <p>Conecta tu CRM, tus planillas y tus sistemas, sigue los indicadores del negocio y deja registro de cada cambio.</p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
-      <p>&copy; 2025 Soluway. Todos los derechos reservados.</p>
-      <div class="flex gap-4">
-        <a href="#terminos"  onclick="showLegal('terminos')"  class="hover:text-white transition-colors cursor-pointer">Términos y condiciones</a>
-        <a href="#privacidad" onclick="showLegal('privacidad')" class="hover:text-white transition-colors cursor-pointer">Privacidad</a>
-        <a href="#cookies"   onclick="showLegal('cookies')"   class="hover:text-white transition-colors cursor-pointer">Cookies</a>
+  <!-- ── Cómo trabajamos ── -->
+  <section id="como" class="seccion">
+    <div class="wrap seccion-grid">
+      <span class="kicker">→ Cómo trabajamos</span>
+      <div>
+        <h2>Tres pasos, sin vueltas</h2>
+        <ol class="pasos">
+          <li>
+            <div>
+              <h3>Diagnóstico</h3>
+              <p>Nos contás cómo trabaja tu negocio hoy. Te decimos qué conviene automatizar, qué no, y cuánto sale. Si no conviene, también te lo decimos — antes de cobrarte un peso.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Construcción a medida</h3>
+              <p>Armamos la herramienta para tu proceso, no un producto enlatado. La probás con casos reales tuyos y la ajustamos hasta que funcione como esperás.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Puesta en marcha</h3>
+              <p>Te la dejamos andando, te enseñamos a usarla en criollo y seguimos cerca por si algo hay que tocar. No desaparecemos después de entregar.</p>
+            </div>
+          </li>
+        </ol>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Contacto ── -->
+  <section id="contacto" class="seccion">
+    <div class="wrap seccion-grid">
+      <span class="kicker">→ Contacto</span>
+      <div>
+        <h2>Contanos qué te frena</h2>
+        <p class="intro">
+          Escribinos qué proceso te consume más tiempo y te respondemos con un plan inicial. Sin compromiso.
+        </p>
+        <a href="mailto:soluway.group@gmail.com" class="contacto-mail">soluway.group@gmail.com</a>
+
+        <form action="https://formspree.io/f/xbdzyqjd" method="POST" id="contact-form">
+          <div class="campo campo-doble">
+            <div class="campo">
+              <label for="f-nombre">Nombre</label>
+              <input type="text" id="f-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre" />
+            </div>
+            <div class="campo">
+              <label for="f-email">Email</label>
+              <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
+            </div>
+          </div>
+          <div class="campo">
+            <label for="f-empresa">Negocio <span style="color:var(--gris-texto);font-weight:400">(opcional)</span></label>
+            <input type="text" id="f-empresa" name="empresa" autocomplete="organization" placeholder="Nombre de tu negocio" />
+          </div>
+          <div class="campo">
+            <label for="f-mensaje">¿Qué querés dejar de hacer a mano?</label>
+            <textarea id="f-mensaje" name="mensaje" required rows="4" placeholder="Ej: contesto los mismos mensajes de WhatsApp todo el día…"></textarea>
+          </div>
+          <button type="submit" class="btn" id="submit-btn">Enviar consulta</button>
+          <p class="form-msg ok" id="form-success" hidden>Mensaje enviado. Te respondemos en menos de 24 hs.</p>
+          <p class="form-msg error" id="form-error" hidden>No se pudo enviar. Escribinos directo a soluway.group@gmail.com</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-marca">
+        <img src="assets/logo.png" alt="Soluway" />
+        <p>Tu socio tech.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Pie de página">
+        <a href="#posibilidades">Posibilidades</a>
+        <a href="#caso">Caso real</a>
+        <a href="#herramientas">Herramientas</a>
+        <a href="#como">Cómo trabajamos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+
+    <div class="legales">
+      <details>
+        <summary>Términos y condiciones</summary>
+        <div>
+          <p>El uso de este sitio implica la aceptación de estos términos.</p>
+          <p>El contenido es informativo y puede cambiar sin aviso previo. Soluway no garantiza resultados específicos; estos dependen del contexto y las particularidades de cada cliente.</p>
+          <p>Todos los materiales, textos y desarrollos son propiedad de Soluway salvo indicación contraria.</p>
+          <p>Ante consultas, escribir a soluway.group@gmail.com</p>
+        </div>
+      </details>
+      <details>
+        <summary>Política de privacidad</summary>
+        <div>
+          <p>Podemos recopilar datos que nos enviés (nombre, email, mensaje) para responder consultas y coordinar reuniones.</p>
+          <p>No vendemos ni compartimos datos con terceros.</p>
+          <p>Podés solicitar acceso, modificación o eliminación de tus datos escribiendo a soluway.group@gmail.com</p>
+          <p>Los datos se almacenan de forma segura y solo se utilizan con el fin por el que fueron enviados.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Política de cookies</summary>
+        <div>
+          <p>Podemos usar cookies técnicas y de analítica para mejorar la experiencia y medir el tráfico del sitio.</p>
+          <p>No utilizamos cookies de terceros con fines publicitarios.</p>
+          <p>Podés gestionar o deshabilitar las cookies desde la configuración de tu navegador sin que esto afecte la funcionalidad principal del sitio.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="footer-base">
+      <p>© 2026 SOLUWAY — TODOS LOS DERECHOS RESERVADOS</p>
+      <p>SOLUWAY.COM.AR · BUENOS AIRES, ARGENTINA</p>
     </div>
   </div>
 </footer>
 
-
-<!-- ─── LEGAL MODAL ─────────────────────────────────────────── -->
-<div id="legal-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4">
-  <div class="bg-white rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto relative">
-    <button onclick="closeLegal()" class="absolute top-4 right-4 text-muted hover:text-dark">
-      <i class="fa-solid fa-xmark text-xl"></i>
-    </button>
-    <h3 id="legal-title" class="font-bold text-dark text-xl mb-4"></h3>
-    <div id="legal-content" class="text-sm text-muted leading-relaxed space-y-3"></div>
-  </div>
-</div>
-
-
-<!-- ─── SCROLL TOP ──────────────────────────────────────────── -->
-<div id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fa-solid fa-arrow-up text-sm"></i>
-</div>
-
-
-<!-- ─── SCRIPTS ────────────────────────────────────────────── -->
 <script>
-  // ── Hamburger menu ──────────────────────────────────────────
-  let menuOpen = false;
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    document.getElementById('mobile-menu').classList.toggle('hidden', !menuOpen);
-  }
-  function closeMenu() {
-    menuOpen = false;
-    document.getElementById('mobile-menu').classList.add('hidden');
-  }
-
-  // ── Intersection Observer: fade-in + counters ────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ── Counter animation ─────────────────────────────────────────
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target);
-    const prefix = el.dataset.prefix || '';
-    const duration = 1800;
-    const step = target / (duration / 16);
-    let current = 0;
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = prefix + Math.floor(current).toLocaleString('es-AR');
-      if (current >= target) clearInterval(timer);
-    }, 16);
-  }
-
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        e.target.querySelectorAll('[data-target]').forEach(animateCounter);
-        counterObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
-
-  // ── Scroll top button ──────────────────────────────────────────
-  window.addEventListener('scroll', () => {
-    document.getElementById('scroll-top').classList.toggle('show', window.scrollY > 400);
-  });
-
-  // ── Contact form (Formspree) ───────────────────────────────────
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
+    const ok = document.getElementById('form-success');
+    const err = document.getElementById('form-error');
+    ok.hidden = true;
+    err.hidden = true;
     btn.textContent = 'Enviando…';
     btn.disabled = true;
-
     try {
       const res = await fetch(form.action, {
         method: 'POST',
@@ -736,68 +822,17 @@
         headers: { Accept: 'application/json' },
       });
       if (res.ok) {
-        document.getElementById('form-success').classList.remove('hidden');
+        ok.hidden = false;
         form.reset();
       } else {
-        document.getElementById('form-error').classList.remove('hidden');
+        err.hidden = false;
       }
     } catch {
-      document.getElementById('form-error').classList.remove('hidden');
+      err.hidden = false;
     } finally {
-      btn.textContent = 'Solicitar consulta gratis';
+      btn.textContent = 'Enviar consulta';
       btn.disabled = false;
     }
-  });
-
-  // ── Legal modal ────────────────────────────────────────────────
-  const legalContent = {
-    terminos: {
-      title: 'Términos y Condiciones',
-      content: `
-        <p>El uso de este sitio implica la aceptación de estos términos.</p>
-        <p>El contenido es informativo y puede cambiar sin aviso previo. Soluway no garantiza resultados específicos; estos dependen del contexto y las particularidades de cada cliente.</p>
-        <p>Todos los materiales, textos y desarrollos son propiedad de Soluway salvo indicación contraria.</p>
-        <p>Ante consultas, escribir a <strong>soluway.group@gmail.com</strong></p>
-      `
-    },
-    privacidad: {
-      title: 'Política de Privacidad',
-      content: `
-        <p>Podemos recopilar datos que nos enviés (nombre, email, mensaje) para responder consultas y coordinar reuniones.</p>
-        <p>No vendemos ni compartimos datos con terceros.</p>
-        <p>Podés solicitar acceso, modificación o eliminación de tus datos escribiendo a <strong>soluway.group@gmail.com</strong></p>
-        <p>Los datos se almacenan de forma segura y solo se utilizan con el fin por el que fueron enviados.</p>
-      `
-    },
-    cookies: {
-      title: 'Política de Cookies',
-      content: `
-        <p>Podemos usar cookies técnicas y de analítica para mejorar la experiencia y medir el tráfico del sitio.</p>
-        <p>No utilizamos cookies de terceros con fines publicitarios.</p>
-        <p>Podés gestionar o deshabilitar las cookies desde la configuración de tu navegador sin que esto afecte la funcionalidad principal del sitio.</p>
-      `
-    }
-  };
-
-  function showLegal(type) {
-    const modal = document.getElementById('legal-modal');
-    document.getElementById('legal-title').textContent = legalContent[type].title;
-    document.getElementById('legal-content').innerHTML = legalContent[type].content;
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLegal() {
-    const modal = document.getElementById('legal-modal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
-  }
-
-  // Close modal on backdrop click
-  document.getElementById('legal-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeLegal();
   });
 </script>
 

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-03T00:00:00Z",
+  "title": "Design System: Soluway — Landing",
+  "extensions": {
+    "colorMeta": {
+      "verde": { "role": "primary", "displayName": "Verde Soluway", "canonical": "#2F7D6B", "tonalRamp": ["#0E2620", "#16382F", "#1F4F42", "#2F7D6B", "#3FA58E", "#7CC4B2", "#B4DED3", "#E3F2ED"] },
+      "acento": { "role": "primary", "displayName": "Verde Acento (solo hover)", "canonical": "#3FA58E", "tonalRamp": ["#123A31", "#1C5346", "#2A7A66", "#3FA58E", "#63B8A4", "#8FCCBD", "#BCE1D7", "#E6F4F0"] },
+      "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#0F1F1B", "tonalRamp": ["#070F0D", "#0F1F1B", "#24352F", "#3D4F48", "#57685F", "#7E8E86", "#AEBAB4", "#E2E8E5"] },
+      "crema": { "role": "neutral", "displayName": "Crema", "canonical": "#F5FAF8", "tonalRamp": ["#1A211F", "#4C5A55", "#808F89", "#B3C1BB", "#D5E2DC", "#E7F0EC", "#F0F7F4", "#F5FAF8"] },
+      "blanco-superficie": { "role": "neutral", "displayName": "Blanco Superficie", "canonical": "#FFFFFF", "tonalRamp": ["#202624", "#525C58", "#858E8A", "#B0B8B4", "#D2D8D5", "#E6EAE8", "#F4F6F5", "#FFFFFF"] },
+      "gris-suave": { "role": "neutral", "displayName": "Gris Suave (hairlines)", "canonical": "#DCE7E2", "tonalRamp": ["#1C2320", "#48544F", "#75837C", "#A0AFA8", "#C3D1CA", "#DCE7E2", "#EAF1ED", "#F6F9F7"] },
+      "gris-texto": { "role": "neutral", "displayName": "Gris Texto (AA derivado)", "canonical": "#57685F", "tonalRamp": ["#151A17", "#28322D", "#3D4B44", "#57685F", "#75857C", "#98A59E", "#BEC7C2", "#E4E9E6"] },
+      "terracota": { "role": "tertiary", "displayName": "Terracota (problemas)", "canonical": "#E76F51", "tonalRamp": ["#4A1F14", "#7A3320", "#A6432A", "#C14E31", "#E76F51", "#EE9179", "#F5BBA9", "#FBE3DB"] },
+      "terracota-texto": { "role": "tertiary", "displayName": "Terracota Texto (AA)", "canonical": "#C14E31", "tonalRamp": ["#3B180E", "#63281A", "#8E3A24", "#C14E31", "#D96A4C", "#E79075", "#F1BBA8", "#F9E2D9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Solo el H1 del hero. Máx. 15ch, text-wrap: balance, énfasis con em en verde." },
+      "headline": { "displayName": "Headline", "purpose": "H2 de sección." },
+      "title": { "displayName": "Title", "purpose": "H3 de filas del índice y pasos. Space Grotesk 500, nunca bold." },
+      "body": { "displayName": "Body", "purpose": "Cuerpo base en tinta; subtítulo hero a 1.1875rem en gris texto." },
+      "body-secundario": { "displayName": "Body secundario", "purpose": "Descripciones, intros y notas en gris texto, 60–62ch." },
+      "label": { "displayName": "Label / Kicker", "purpose": "Kickers mono en mayúsculas, tracking 0.14em, verde." },
+      "metadata": { "displayName": "Metadata", "purpose": "Notas mono: hero, meta del caso, email, numeración de pasos." }
+    },
+    "shadows": [
+      { "name": "focus-ring-input", "value": "0 0 0 3px color-mix(in srgb, #2F7D6B 15%, transparent)", "purpose": "Único box-shadow del sistema: anillo de foco de inputs. No existen sombras de elevación." }
+    ],
+    "motion": [
+      { "name": "entrada-hero", "value": "subir .8s cubic-bezier(0.16, 1, 0.3, 1) forwards, stagger 80ms, desde opacity .45 / translateY(18px)", "purpose": "Único momento autoral; gated por prefers-reduced-motion: no-preference." },
+      { "name": "micro-transicion", "value": "150–180ms ease", "purpose": "Hover de color/fondo/transform en botones, links, filas del índice." }
+    ],
+    "breakpoints": [
+      { "name": "form", "value": "600px" },
+      { "name": "filas-nav", "value": "720px" },
+      { "name": "antes-despues", "value": "780px" },
+      { "name": "seccion-grid", "value": "860px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA sólido verde; hover pasa a acento y sube 1px.",
+      "html": "<a href=\"#\" class=\"ds-btn\">Contanos qué te frena</a>",
+      "css": ".ds-btn { display: inline-block; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; background: #2F7D6B; color: #F5FAF8; padding: 15px 30px; border-radius: 6px; border: none; cursor: pointer; text-decoration: none; transition: background .18s ease, transform .18s ease; } .ds-btn:hover { background: #3FA58E; transform: translateY(-1px); } .ds-btn:focus-visible { outline: 2px solid #2F7D6B; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Link flecha (CTA secundario)",
+      "kind": "button",
+      "description": "CTA tipográfico: texto en tinta con flecha verde; todo pasa a verde en hover.",
+      "html": "<a href=\"#\" class=\"ds-link-arrow\">Ver qué es posible</a>",
+      "css": ".ds-link-arrow { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: #0F1F1B; text-decoration: none; transition: color .15s ease; } .ds-link-arrow::after { content: ' ↓'; color: #2F7D6B; } .ds-link-arrow:hover { color: #2F7D6B; }"
+    },
+    {
+      "name": "Kicker de sección",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "Etiqueta mono verde que abre toda sección; fuera del hero lleva flecha.",
+      "html": "<span class=\"ds-kicker\">→ Posibilidades</span>",
+      "css": ".ds-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; color: #2F7D6B; text-transform: uppercase; }"
+    },
+    {
+      "name": "Input de formulario",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo crema sobre card blanca; focus con borde verde y anillo al 15%.",
+      "html": "<div class=\"ds-campo\"><label class=\"ds-label\" for=\"ds-email\">Email</label><input class=\"ds-input\" type=\"email\" id=\"ds-email\" placeholder=\"tu@email.com\" /></div>",
+      "css": ".ds-label { display: block; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; color: #0F1F1B; margin-bottom: 8px; } .ds-input { width: 100%; font-family: 'Inter', sans-serif; font-size: 0.9375rem; color: #0F1F1B; background: #F5FAF8; border: 1px solid #DCE7E2; border-radius: 6px; padding: 12px 14px; transition: border-color .15s ease, box-shadow .15s ease; } .ds-input::placeholder { color: #57685F; } .ds-input:focus { outline: none; border-color: #2F7D6B; box-shadow: 0 0 0 3px color-mix(in srgb, #2F7D6B 15%, transparent); }"
+    },
+    {
+      "name": "Fila del índice tipográfico",
+      "kind": "custom",
+      "description": "Patrón firma para enumerar servicios: grilla 260px/1fr entre hairlines, hover verde con flecha deslizante.",
+      "html": "<ul class=\"ds-indice\"><li class=\"ds-fila\"><h3>Bot de WhatsApp</h3><p>Responde consultas, agenda turnos y manda información las 24 hs.</p></li><li class=\"ds-fila\"><h3>Reportes sin planillas</h3><p>Tus métricas del día llegan solas a tu WhatsApp o email cada mañana.</p></li></ul>",
+      "css": ".ds-indice { list-style: none; margin: 0; padding: 0; border-top: 1px solid #DCE7E2; } .ds-indice li { border-bottom: 1px solid #DCE7E2; } .ds-fila { display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding: 26px 0; align-items: baseline; } .ds-fila h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1.25rem; letter-spacing: -0.01em; margin: 0; color: #0F1F1B; transition: color .15s ease; } .ds-fila p { font-family: 'Inter', sans-serif; font-size: 0.9375rem; color: #57685F; max-width: 62ch; margin: 0; } .ds-indice li:hover h3 { color: #2F7D6B; } .ds-fila h3::after { content: ' →'; color: #2F7D6B; opacity: 0; display: inline-block; transform: translateX(-4px); transition: opacity .18s ease, transform .18s ease; } .ds-indice li:hover h3::after { opacity: 1; transform: none; }"
+    },
+    {
+      "name": "Card antes/después",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Card blanca de prueba en dos columnas divididas por hairline; chips cuadrados terracota/verde titulan cada columna.",
+      "html": "<div class=\"ds-ad\"><div class=\"ds-ad-col ds-ad-antes\"><p class=\"ds-ad-titulo\">Antes — todo a mano</p><div class=\"ds-dato\"><strong>4 hs por día</strong><span>gestionando turnos por WhatsApp y teléfono</span></div></div><div class=\"ds-ad-col ds-ad-despues\"><p class=\"ds-ad-titulo\">Después — con el bot andando</p><div class=\"ds-dato\"><strong>Recordatorio automático</strong><span>24 hs antes de cada turno</span></div></div></div>",
+      "css": ".ds-ad { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #DCE7E2; border-radius: 8px; overflow: hidden; background: #fff; font-family: 'Inter', sans-serif; } .ds-ad-col { padding: 36px; } .ds-ad-antes { border-right: 1px solid #DCE7E2; } .ds-ad-titulo { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 24px; color: #0F1F1B; display: flex; align-items: center; gap: 10px; } .ds-ad-titulo::before { content: ''; width: 10px; height: 10px; flex-shrink: 0; } .ds-ad-antes .ds-ad-titulo::before { background: #E76F51; } .ds-ad-despues .ds-ad-titulo::before { background: #2F7D6B; } .ds-dato strong { display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 2px; font-variant-numeric: tabular-nums; } .ds-ad-antes .ds-dato strong { color: #E76F51; } .ds-ad-despues .ds-dato strong { color: #2F7D6B; } .ds-dato span { font-size: 0.9375rem; color: #57685F; }"
+    },
+    {
+      "name": "Paso numerado",
+      "kind": "custom",
+      "description": "Ítem de proceso: número mono verde con cero inicial en columna de 64px, hairline superior.",
+      "html": "<ol class=\"ds-pasos\"><li><div><h3>Diagnóstico</h3><p>Nos contás cómo trabaja tu negocio hoy. Te decimos qué conviene automatizar y cuánto sale.</p></div></li></ol>",
+      "css": ".ds-pasos { list-style: none; margin: 0; padding: 0; counter-reset: paso; } .ds-pasos li { counter-increment: paso; display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 28px 0; border-top: 1px solid #DCE7E2; } .ds-pasos li::before { content: counter(paso, decimal-leading-zero); font-family: 'IBM Plex Mono', monospace; font-size: 0.875rem; color: #2F7D6B; padding-top: 5px; } .ds-pasos h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1.25rem; margin: 0 0 6px; color: #0F1F1B; } .ds-pasos p { font-family: 'Inter', sans-serif; color: #57685F; font-size: 0.9375rem; max-width: 60ch; margin: 0; }"
+    },
+    {
+      "name": "Nav sticky",
+      "kind": "nav",
+      "description": "Barra de 64px, crema al 88% con blur, hairline inferior; links tinta con hover verde y CTA compacto.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-nav-logo\">Soluway</span><nav class=\"ds-nav-links\"><a href=\"#\">Posibilidades</a><a href=\"#\">Caso real</a><a href=\"#\" class=\"ds-btn-nav\">Hablemos</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; background: color-mix(in srgb, #F5FAF8 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid #DCE7E2; font-family: 'Inter', sans-serif; } .ds-nav-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #0F1F1B; } .ds-nav-links { display: flex; align-items: center; gap: 32px; font-size: 0.9375rem; font-weight: 500; } .ds-nav-links a { color: #0F1F1B; text-decoration: none; transition: color .15s ease; } .ds-nav-links a:hover { color: #2F7D6B; } .ds-btn-nav { background: #2F7D6B; color: #F5FAF8 !important; padding: 9px 20px; border-radius: 6px; transition: background .18s ease; } .ds-btn-nav:hover { background: #3FA58E; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Minimalismo tipográfico puro",
+    "overview": "Es la traducción web del Manual de Marca Soluway v1.0: sin metáforas ni mundos conceptuales, la marca se demuestra en ejecución precisa. La tipografía grande hace todo el trabajo — Space Grotesk enorme y apretada para los titulares, Inter para el cuerpo, IBM Plex Mono para etiquetas y metadata — sobre un fondo crema casi blanco estructurado exclusivamente con reglas hairline. El aire es el lujo. La densidad es baja y editorial: cada sección es una grilla de dos columnas (etiqueta mono a la izquierda, contenido a la derecha) que se lee como el índice de un documento. No hay cards con iconos, ni contadores animados, ni ilustraciones de hero, ni sombras decorativas. El listón de artesanía es Linear / Stripe / Vercel: micro-transiciones de 150–180ms, un único momento de motion autoral (la entrada escalonada del hero) y accesibilidad como parte del acabado.",
+    "keyCharacteristics": [
+      "Tipografía como único ornamento; jerarquía de tamaño y familia, no de decoración.",
+      "Un solo acento (verde #2F7D6B); terracota solo para señalar problemas.",
+      "Reglas hairline #DCE7E2 como toda la estructura visual — bordes, no sombras.",
+      "Grilla de sección con columna de kicker mono de 220px.",
+      "Aire generoso: el espacio en blanco es el lujo de la página."
+    ],
+    "rules": [
+      { "name": "La Regla del Único Acento", "body": "El verde es la única voz de color de la página; el hover es siempre y solo el paso a #3FA58E. Todo lo demás es crema, tinta y grises del mismo matiz verdoso.", "section": "colors" },
+      { "name": "La Regla de la Terracota", "body": "La terracota nombra problemas y nada más: el \"antes\" del caso y el error del formulario. Nunca es decoración, nunca es acento alternativo.", "section": "colors" },
+      { "name": "La Regla del Contraste Derivado", "body": "Cuando un color del manual no alcanza AA para texto, se oscurece manteniendo el matiz (gris UI → #57685F; terracota → #C14E31 en texto chico). El manual manda el matiz; la legibilidad manda la luminosidad.", "section": "colors" },
+      { "name": "La Regla del Kicker", "body": "Toda sección abre con su etiqueta mono en verde, mayúsculas y tracking 0.14em; fuera del hero lleva la flecha del manual (→ Nombre). Es el primer nivel de la jerarquía de marca, no un adorno.", "section": "typography" },
+      { "name": "La Regla de la Mono Funcional", "body": "IBM Plex Mono aparece solo donde hay dato, etiqueta o metadata (kickers, cifras de contexto, numeración 01/02/03, legales del footer). Nunca en cuerpo de lectura.", "section": "typography" },
+      { "name": "La Regla Sin Sombras", "body": "Ninguna superficie proyecta sombra en reposo ni en hover. Si algo necesita destacarse, se destaca con borde, con blanco sobre crema, o con tipografía.", "section": "elevation" },
+      { "name": "La Regla del Único Momento", "body": "Hay una sola animación de entrada en toda la página (el hero). Ninguna sección nueva agrega reveals on-scroll, parallax ni contadores.", "section": "components" }
+    ],
+    "dos": [
+      "Do abrir cada sección con su kicker mono (→ Nombre, 0.75rem, 0.14em, mayúsculas, verde) en la columna de 220px de la grilla de sección.",
+      "Do estructurar con hairlines #DCE7E2 de 1px: entre secciones, entre filas, entre datos, entre legales.",
+      "Do usar la crema #F5FAF8 como fondo global y el blanco #fff solo como superficie de card con borde.",
+      "Do limitar anchos de lectura con ch (58–62ch en cuerpo, 70ch en legales) y balancear titulares con text-wrap: balance.",
+      "Do derivar tonos más oscuros del mismo matiz cuando un color de marca no pase AA en texto (#57685F, #C14E31).",
+      "Do envolver toda animación en @media (prefers-reduced-motion: no-preference) y mantener el :focus-visible verde global."
+    ],
+    "donts": [
+      "Don't usar cards con iconos, glifos decorativos ni ilustraciones — la enumeración canónica es el índice tipográfico.",
+      "Don't agregar sombras a superficies ni en hover; la elevación es borde + paso tonal.",
+      "Don't usar la terracota fuera de señalar problemas (columna \"antes\", mensajes de error).",
+      "Don't inventar métricas, contadores animados ni testimonios; la única prueba publicable es el caso real antes/después.",
+      "Don't introducir un segundo acento de color ni usar #3FA58E en reposo — es exclusivamente hover.",
+      "Don't sumar animaciones de entrada más allá del hero, ni reveals on-scroll."
+    ]
+  }
+}
