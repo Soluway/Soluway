@@ -179,6 +179,52 @@
       @keyframes subir {
         to { opacity: 1; transform: none; }
       }
+
+      /* ── Llegada al scroll: una sola gramática ──
+         La línea de sección se dibuja, el kicker entra por donde apunta
+         su flecha, el contenido sube, los ítems llegan en orden de lectura.
+         Solo con JS (html.js) y solo si el usuario acepta motion. */
+      .js section.seccion { border-top-color: transparent; position: relative; }
+      .js section.seccion::before {
+        content: '';
+        position: absolute;
+        top: -1px; left: 0; right: 0;
+        height: 1px;
+        background: var(--gris-suave);
+        transform: scaleX(0);
+        transform-origin: 0 0;
+        transition: transform .9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .js section.seccion.visible::before { transform: none; }
+
+      .js .seccion .seccion-grid > .kicker {
+        opacity: 0;
+        transform: translateX(-14px);
+        transition: opacity .6s cubic-bezier(0.16, 1, 0.3, 1) .12s,
+                    transform .6s cubic-bezier(0.16, 1, 0.3, 1) .12s;
+      }
+      .js .seccion .seccion-grid > div {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1) .08s,
+                    transform .7s cubic-bezier(0.16, 1, 0.3, 1) .08s;
+      }
+      .js .seccion.visible .seccion-grid > .kicker,
+      .js .seccion.visible .seccion-grid > div { opacity: 1; transform: none; }
+
+      .js .seccion .fila,
+      .js .seccion .herramienta,
+      .js .seccion .pasos li,
+      .js .seccion .antes-despues > div {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity .55s cubic-bezier(0.16, 1, 0.3, 1) var(--d, .2s),
+                    transform .55s cubic-bezier(0.16, 1, 0.3, 1) var(--d, .2s);
+      }
+      .js .seccion.visible .fila,
+      .js .seccion.visible .herramienta,
+      .js .seccion.visible .pasos li,
+      .js .seccion.visible .antes-despues > div { opacity: 1; transform: none; }
     }
 
     /* ── Secciones: grilla etiqueta / contenido ── */
@@ -526,7 +572,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <h1>Lo que hoy hacés a mano, mañana <em>se hace solo</em>.</h1>
       <p class="hero-sub">
         Construimos bots de WhatsApp, automatizaciones y herramientas a medida para tu negocio.
-        Sin tecnicismos: te decimos qué se puede automatizar y cuánto tiempo te devuelve.
+        Nos contás cómo trabajás hoy y te decimos qué puede hacerse solo, cuánto sale
+        y cuánto tiempo te devuelve. Sin verso técnico.
       </p>
       <div class="hero-cta">
         <a href="#contacto" class="btn">Contanos qué te frena</a>
@@ -543,41 +590,41 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div>
         <h2>Qué se puede automatizar hoy</h2>
         <p class="intro">
-          No hace falta ser una empresa grande. Estos son procesos que negocios como el tuyo
-          ya hacen sin tocar el celu.
+          No hace falta ser una empresa grande. Son cosas que negocios como el tuyo
+          ya tienen andando, sin tocar el celu.
         </p>
         <ul class="lista-posibilidades">
           <li class="fila">
             <h3>Bot de WhatsApp</h3>
-            <p>Responde consultas, agenda turnos y manda la información de tus productos las 24 hs. Vos atendés solo lo que necesita una persona.</p>
+            <p>El "¿tenés turno para mañana?" de las 22:47 se contesta solo. El bot agenda, confirma y pasa la info de tus productos; vos entrás cuando hace falta una persona.</p>
           </li>
           <li class="fila">
             <h3>Presupuestos automáticos</h3>
-            <p>El cliente completa un formulario y recibe su presupuesto al instante. Sin ir y venir de mensajes, sin errores de cálculo.</p>
+            <p>El cliente llena un formulario y le llega el presupuesto armado, al toque. Se terminó el ida y vuelta de mensajes para pasar un precio.</p>
           </li>
           <li class="fila">
             <h3>Emails que se responden solos</h3>
-            <p>El sistema detecta de qué se trata cada email, responde lo frecuente y te deriva solo lo que importa.</p>
+            <p>El sistema lee de qué viene cada mail, contesta lo repetido y te deja en la bandeja solo lo que de verdad te necesita.</p>
           </li>
           <li class="fila">
             <h3>Reportes sin planillas</h3>
-            <p>Tus ventas, pedidos o métricas del día llegan solos a tu WhatsApp o email cada mañana.</p>
+            <p>Las ventas de ayer te llegan por WhatsApp antes del primer mate. Nadie abrió ninguna planilla.</p>
           </li>
           <li class="fila">
             <h3>Lectura de documentos</h3>
-            <p>Facturas, remitos y contratos: los datos clave se extraen y se cargan solos en tu sistema. Sin tipear.</p>
+            <p>Facturas, remitos, contratos. Los datos se cargan solos en tu sistema, sin tipear ni equivocarle un número.</p>
           </li>
           <li class="fila">
             <h3>Agenda y turnos online</h3>
-            <p>Tus clientes reservan, reciben recordatorio automático y cancelan sin que intervengas. Menos no-shows.</p>
+            <p>Tus clientes reservan y les llega el recordatorio sin que intervengas. Los no-shows bajan solos.</p>
           </li>
           <li class="fila">
             <h3>Control de stock</h3>
-            <p>Alertas automáticas antes de que un producto se agote. El sistema lleva el seguimiento, vos solo comprás.</p>
+            <p>Te avisa antes de que se acabe, no después. El seguimiento lo lleva el sistema; vos solo comprás.</p>
           </li>
           <li class="fila">
             <h3>Integraciones entre sistemas</h3>
-            <p>Tu agenda, tus planillas y tu facturación hablando entre sí, sin que copies datos de un lado a otro.</p>
+            <p>Tu agenda, tus planillas y tu facturación dejan de ser tres islas. Cargás el dato una vez y aparece donde tiene que estar.</p>
           </li>
         </ul>
         <p class="nota-lista">
@@ -635,8 +682,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </div>
         </div>
         <p class="caso-cierre">
-          El caso es real; omitimos el nombre de la clínica por pedido del cliente.
-          Si tenés un negocio con turnos, este mismo esquema aplica casi directo.
+          El caso es real. El nombre no está porque la clínica prefirió no aparecer,
+          y eso también lo respetamos. Si tu negocio vive de turnos, este esquema
+          te sirve casi tal cual.
         </p>
       </div>
     </div>
@@ -691,19 +739,19 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <li>
             <div>
               <h3>Diagnóstico</h3>
-              <p>Nos contás cómo trabaja tu negocio hoy. Te decimos qué conviene automatizar, qué no, y cuánto sale. Si no conviene, también te lo decimos — antes de cobrarte un peso.</p>
+              <p>Nos sentamos a ver cómo trabaja tu negocio hoy. De ahí sale qué conviene automatizar, qué no, y cuánto cuesta. Y si no te conviene, te lo decimos antes de cobrarte un peso.</p>
             </div>
           </li>
           <li>
             <div>
               <h3>Construcción a medida</h3>
-              <p>Armamos la herramienta para tu proceso, no un producto enlatado. La probás con casos reales tuyos y la ajustamos hasta que funcione como esperás.</p>
+              <p>Armamos la herramienta sobre tu proceso real, no un enlatado. La probás con tus casos de todos los días y la vamos ajustando hasta que quede.</p>
             </div>
           </li>
           <li>
             <div>
               <h3>Puesta en marcha</h3>
-              <p>Te la dejamos andando, te enseñamos a usarla en criollo y seguimos cerca por si algo hay que tocar. No desaparecemos después de entregar.</p>
+              <p>Te la dejamos andando y te enseñamos a usarla en criollo. Después seguimos cerca, porque las herramientas se ajustan con el uso y nosotros no desaparecemos después de entregar.</p>
             </div>
           </li>
         </ol>
@@ -718,7 +766,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div>
         <h2>Contanos qué te frena</h2>
         <p class="intro">
-          Escribinos qué proceso te consume más tiempo y te respondemos con un plan inicial. Sin compromiso.
+          Contanos qué proceso te come el día y te respondemos con un plan inicial. Sin compromiso.
         </p>
         <a href="mailto:soluway.group@gmail.com" class="contacto-mail">soluway.group@gmail.com</a>
 
@@ -805,6 +853,27 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </footer>
 
 <script>
+  // ── Llegada al scroll ──
+  document.documentElement.classList.add('js');
+
+  // escalonado en orden de lectura dentro de cada sección
+  document.querySelectorAll('section.seccion').forEach(sec => {
+    sec.querySelectorAll('.fila, .herramienta, .pasos li, .antes-despues > div')
+      .forEach((el, i) => el.style.setProperty('--d', (200 + i * 60) + 'ms'));
+  });
+
+  const revelar = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revelar.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section.seccion').forEach(s => revelar.observe(s));
+
+  // ── Formulario ──
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

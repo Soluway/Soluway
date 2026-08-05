@@ -231,9 +231,14 @@ Lista ordenada con contador CSS: número mono verde con cero inicial (`01`, `02`
 Acordeones `<details>` nativos entre hairlines: summary en tinta 500 de 0.875rem con `+`/`−` mono verde a la derecha; contenido en gris texto, máx. 70ch. El footer cierra con la base mono de 0.75rem en mayúsculas.
 
 ### Motion
-Un solo momento autoral: la entrada del hero. Los hijos directos arrancan en `opacity: .45` y `translateY(18px)` y suben con `cubic-bezier(0.16, 1, 0.3, 1)` en 800ms, escalonados de a 80ms — el arranque en .45 garantiza que una animación pausada nunca deje el hero en blanco. Todo el bloque vive dentro de `@media (prefers-reduced-motion: no-preference)`. El resto del motion son micro-transiciones de 150–180ms `ease` sobre color, fondo y transform. `scroll-behavior: smooth` para las anclas.
+Dos momentos autorales con una sola gramática (`cubic-bezier(0.16, 1, 0.3, 1)` en todo):
 
-**La Regla del Único Momento.** Hay una sola animación de entrada en toda la página (el hero). Ninguna sección nueva agrega reveals on-scroll, parallax ni contadores.
+1. **Entrada del hero** (on load): los hijos directos arrancan en `opacity: .45` y `translateY(18px)` y suben en 800ms, escalonados de a 80ms — el arranque en .45 garantiza que una animación pausada nunca deje el hero en blanco.
+2. **Llegada al scroll** (por sección, una vez, vía IntersectionObserver): la hairline superior se dibuja de izquierda a derecha (900ms), el kicker entra deslizándose desde la izquierda (la dirección de su flecha), el bloque de contenido sube 16px, y los ítems internos (filas, herramientas, pasos, columnas del caso) llegan escalonados de a 60ms en orden de lectura (`--d` seteado por JS).
+
+Salvaguardas: todo vive dentro de `@media (prefers-reduced-motion: no-preference)` Y bajo `html.js` (sin JS no hay estados ocultos). El resto del motion son micro-transiciones de 150–180ms sobre color, fondo y transform. `scroll-behavior: smooth` para las anclas.
+
+**La Regla de la Única Gramática.** Todo el motion de entrada comparte easing, dirección (orden de lectura) y moderación; se dispara una sola vez por elemento. Prohibidos: parallax, contadores animados, reveals que se repiten al re-scrollear, y cualquier entrada con easing o dirección propia.
 
 ## Do's and Don'ts
 
@@ -251,4 +256,4 @@ Un solo momento autoral: la entrada del hero. Los hijos directos arrancan en `op
 - **Don't** usar la terracota fuera de señalar problemas (columna "antes", mensajes de error).
 - **Don't** inventar métricas, contadores animados ni testimonios; la única prueba publicable es el caso real antes/después.
 - **Don't** introducir un segundo acento de color ni usar #3FA58E en reposo — es exclusivamente hover.
-- **Don't** sumar animaciones de entrada más allá del hero, ni reveals on-scroll.
+- **Don't** sumar motion fuera de la gramática única: nada de parallax, contadores, reveals repetibles ni easings nuevos.
